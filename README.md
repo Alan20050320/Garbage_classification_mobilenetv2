@@ -1,5 +1,5 @@
 
-# garbage-classification-mobilenetv2
+# Garbage_classification_mobilenetv2
 基于 MobileNetV2 的垃圾分类图像识别项目
 
 ## 项目说明
