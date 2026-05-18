@@ -23,12 +23,14 @@
 
 
 ## 目录结构
+```text
 Garbage_classification_mobilenetv2/
 ├── train.py # 训练脚本
 ├── predict.py # 预测脚本（单张 / 批量）
 ├── best_model_v2.pth # 最优模型权重
 ├── garbage_classification/ # 数据集（6 类子文件夹）
 └── predict_results/ # 预测结果（自动生成）
+```
 
 ## 模型效果
 - 数据集：6 类（纸板/玻璃/金属/纸张/塑料/其他垃圾）
