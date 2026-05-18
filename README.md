@@ -1,10 +1,12 @@
 
 # Garbage_classification_mobilenetv2
-基于 MobileNetV2 的垃圾分类图像识别项目
+基于 MobileNetV2 的轻量垃圾分类图像识别（M1 本地训练可用）
 
 ## 项目说明
-本项目使用 PyTorch 框架，基于 MobileNetV2 预训练模型做迁移学习微调，实现生活垃圾图像分类。
-全程在 **Mac M1 芯片** 设备上完成训练与推理，支持单张/批量图片分类，可输出预测结果与可视化报告。
+本项目基于 PyTorch + MobileNetV2 迁移学习，实现 **6 类生活垃圾图像自动分类**。
+- 全程在 **Mac M1/M2（MPS）** 训练，**无需独立 GPU**
+- 训练约 20 分钟，**验证集准确率 ≈ 92%**
+- 支持：单张/批量预测、置信度输出、可视化结果、自动生成报告
 
 ## 训练硬件与环境
 - 设备：MacBook Air（M1 芯片）
@@ -12,7 +14,7 @@
 - 依赖：torch、torchvision、matplotlib
 
 ## 模型效果示例
-模型可对输入图片自动分类，并输出类别与置信度，同时生成对比可视化结果。
+输入图片 → 输出类别 + 置信度 + 概率分布可视化：
 ![预测效果示例](assets/predict_results/11_prediction.jpg)
 ![预测效果示例](assets/predict_results/15_prediction.jpg)
 ![预测效果示例](assets/predict_results/14_prediction.jpg)
@@ -20,7 +22,23 @@
 ![预测效果示例](assets/predict_results/18_prediction.jpg)
 
 
+## 目录结构
+Garbage_classification_mobilenetv2/
+├── train.py # 训练脚本
+├── predict.py # 预测脚本（单张 / 批量）
+├── best_model_v2.pth # 最优模型权重
+├── garbage_classification/ # 数据集（6 类子文件夹）
+└── predict_results/ # 预测结果（自动生成）
 
+## 模型效果
+- 数据集：6 类（纸板/玻璃/金属/纸张/塑料/其他垃圾）
+- 训练时长：约 20 分钟（M1）
+- 最优准确率：**Val Acc ≈ 92.1%**
+- 易混淆：玻璃（glass）↔ 金属（metal），其余类别效果较好
+
+### 训练曲线
+- Loss：快速下降并收敛
+- Val Acc：稳定上升至 92%+
 
 ## 快速使用
 1. 克隆项目并进入目录
@@ -58,11 +76,10 @@ python predict.py 你的图片文件夹路径
 5. 塑料（plastic）
 6. 其他垃圾（trash）
 
-## 文件说明
-- `train.py`：训练脚本，含数据增强、分层解冻、标签平滑、早停、余弦退火学习率
-- `predict.py`：预测脚本，支持单张/批量预测、结果可视化、报告生成
-- `best_model_v2.pth`：训练好的模型权重文件
-- `predict_results/`：预测结果输出目录
+## 适用场景
+- 课程作业 / 入门深度学习项目
+- 移动端/嵌入式垃圾分类原型
+- 无 GPU 设备快速训练、演示
 
 ## 备注
 项目适配 Mac M1 设备，无需独立 GPU 即可完成训练与推理，代码可直接复现运行。
